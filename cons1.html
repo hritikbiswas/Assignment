@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor1</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function BankAccount(accountNumber, name, type, balance) {
+  this.accountNumber = accountNumber;
+  this.name = name;
+  this.type = type;
+  this.balance = balance;
+  this.active = true;
+}
+
+BankAccount.prototype.deposite = function(amount) {
+  if (amount > 0) {
+    this.balance += amount;
+    console.log("deposited amount" + amount + "and new amount" + amount)
+  }
+  else {
+    console.log("invalid amount")
+  }
+}
+
+
+BankAccount.prototype.withdraw = function(amount) {
+  if (this.active == true && amount > 0 && this.balance >= amount) {
+    this.balance -= amount;
+    console.log("deposited amount" + amount + "and new amount" + amount)
+  }
+  else {
+    console.log("invalid amount")
+  }
+}
+function TotalBalance(accounts){
+  let total=0;
+  for(let acc of accounts){
+    if(acc.active) total+=acc.balance
+  }
+  return total
+}
+
+
+let account1 = new BankAccount(1, "hritik", "saving", 400)
+let account2 = new BankAccount(2, "mohit", "current", 300)
+let account3 = new BankAccount(3, "rohit", "current", 200)
+let account4 = new BankAccount(4, "rishi", "current", 100)
+
+let acc=[account1,account2,account3,account4]
+
+console.log(TotalBalance(acc)) 
+
+
+// account1.deposite(100)
+// account1.withdraw(50)
+
+console.log(account1);
+console.log(account2)
+</script>
+</html>
