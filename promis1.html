@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Food Ordering System</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#foodOptions {
+    margin-top: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+#orderResult {
+    display: none;
+    margin-top: 20px;
+}
+
+#foodImage {
+    max-width: 100%;
+}
+
+#orderID {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <button id="orderBtn">Order Food</button>
+    <div id="foodOptions">
+        <label><input type="checkbox" value="Burger">Burger</label>
+        <label><input type="checkbox" value="Fries">Fries</label>
+        <label><input type="checkbox" value="Soda">Soda</label>
+    </div>
+    <div id="orderResult">
+        <img id="foodImage" src="" alt="Food Image">
+        <div id="orderID">Order ID: </div>
+    </div>
+    <script >
+        document.addEventListener("DOMContentLoaded", function() {
+    const orderBtn = document.getElementById("orderBtn");
+    const foodOptions = document.querySelectorAll("#foodOptions input[type='checkbox']");
+    const foodImage = document.getElementById("foodImage");
+    const orderID = document.getElementById("orderID");
+    const orderResult = document.getElementById("orderResult");
+
+    orderBtn.addEventListener("click", () => {
+        const selectedFood = Array.from(foodOptions)
+            .filter(option => option.checked)
+            .map(option => option.value);
+
+        if (selectedFood.length === 0) {
+            alert("Please select at least one item.");
+            return;
+        }
+
+        orderBtn.disabled = true;
+
+        // Simulate a random delay before completing the order
+        const randomDelay = Math.floor(Math.random() * 5000) + 1000;
+        setTimeout(() => {
+            const orderNumber = Math.floor(Math.random() * 1000);
+            const foodItem = selectedFood[Math.floor(Math.random() * selectedFood.length)];
+
+            foodImage.src = `images/${foodItem.toLowerCase()}.jpg`;
+            orderID.textContent = `Order ID: ${orderNumber}`;
+            orderResult.style.display = "block";
+
+            orderBtn.disabled = false;
+        }, randomDelay);
+    });
+});
+
+    </script>
+</body>
+</html>
