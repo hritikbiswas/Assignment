@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment System</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#processing {
+    font-size: 24px;
+    color: #007BFF;
+    margin-top: 20px;
+}
+
+#success {
+    font-size: 24px;
+    color: #28A745;
+    margin-top: 20px;
+}
+
+#failure {
+    font-size: 24px;
+    color: #DC3545;
+    margin-top: 20px;
+}
+
+   </style>
+</head>
+<body>
+    <div id="processing" class="hidden">Processing Payment...</div>
+    <div id="success" class="hidden">Payment Successful</div>
+    <div id="failure" class="hidden">Payment Failed</div>
+    <button id="payButton">Make Payment</button>
+    <script >
+        document.addEventListener("DOMContentLoaded", function() {
+    const payButton = document.getElementById("payButton");
+    const processingDiv = document.getElementById("processing");
+    const successDiv = document.getElementById("success");
+    const failureDiv = document.getElementById("failure");
+
+    payButton.addEventListener("click", () => {
+        // Simulate a payment request using a promise
+        processingDiv.style.display = "block";
+
+        const paymentPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const isPaymentSuccessful = Math.random() < 0.5; // Simulate success or failure
+                if (isPaymentSuccessful) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }, 2000); // Simulate a 2-second payment processing time
+        });
+
+        paymentPromise
+            .then(() => {
+                processingDiv.style.display = "none";
+                successDiv.style.display = "block";
+                failureDiv.style.display = "none";
+            })
+            .catch(() => {
+                processingDiv.style.display = "none";
+                successDiv.style.display = "none";
+                failureDiv.style.display = "block";
+            });
+    });
+});
+
+    </script>
+</body>
+</html>
