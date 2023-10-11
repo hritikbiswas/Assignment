@@ -1,0 +1,49 @@
+Q: What is React?
+
+A: React is an open-source JavaScript library for building user interfaces.
+ It is often used for creating single-page applications and dynamic web 
+ applications. React allows developers to build reusable UI components and 
+ manage the state of their application efficiently.
+
+ Q: Who made React?
+
+A: React was developed and is maintained by Facebook. Jordan Walke, a 
+software engineer at Facebook, created React. It was first released to the 
+public in May 2013
+
+What is Babel?
+
+A: Babel is a JavaScript compiler that allows developers to write code using
+ the latest ECMAScript (JavaScript) features and syntax and then compile it 
+ into older versions of JavaScript that can run in most browsers. Babel is 
+ often used to transpile modern JavaScript code, including JSX (a syntax extension 
+ for JavaScript often used with React), into a format that is widely supported by 
+ different browsers.
+
+
+ Q: How does Babel convert HTML code in React into valid code?
+
+A: Babel doesn't directly convert HTML code into valid React code. Instead, it helps
+ transpile JavaScript code that contains JSX (a syntax extension for JavaScript used 
+ in React) into JavaScript code that can be executed by web browsers. In React, JSX is
+  used to define the structure and layout of components, which Babel transforms into 
+  regular JavaScript function calls.
+
+Q: How does Babel convert HTML code in React into valid code?
+
+A: Babel doesn't directly convert HTML code into valid React code. Instead, it helps
+ transpile JavaScript code that contains JSX (a syntax extension for JavaScript used 
+ in React) into JavaScript code that can be executed by web browsers. In React, JSX is
+  used to define the structure and layout of components, which Babel transforms into
+   regular JavaScript function calls.
+
+
+Q: What is the meaning of render and root in the context of React?
+
+A: In React, the "render" method is used to render React elements into the DOM. It 
+specifies what should be displayed on the screen. The "root" typically refers to the
+ DOM element where your React application is mounted. You use ReactDOM.render() to 
+ render a React element or component into the specified root element. For example, in
+  the code snippet mentioned earlier, ReactDOM.render(<App />, document.
+  getElementById('root')) renders the <App /> component into the HTML element with 
+  the ID "root."
