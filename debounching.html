@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie & Recipe Search</title>
+    <style>
+        /* Add your CSS styles for the layout here */
+    </style>
+</head>
+<body>
+    <h1>Movie Search</h1>
+    <input type="text" id="movieSearch" placeholder="Search for a movie...">
+    <div id="movieResults"></div>
+
+    <h1>Recipe Search</h1>
+    <input type="text" id="recipeSearch" placeholder="Search for a recipe...">
+    <div id="recipeResults"></div>
+
+    <script>
+        const omdbApiKey = 'YOUR_OMDB_API_KEY';
+        const mealDbApiKey = 'YOUR_MEALDB_API_KEY';
+
+        // Debouncing function
+        const debounce = (func, delay) => {
+            let timer;
+            return function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func();
+                }, delay);
+            };
+        };
+
+        // Throttling function
+        const throttle = (func, limit) => {
+            let inThrottle;
+            return function () {
+                if (!inThrottle) {
+                    func();
+                    inThrottle = true;
+                    setTimeout(() => (inThrottle = false), limit);
+                }
+            };
+        };
+
+        // Movie search function
+        const movieSearchInput = document.getElementById('movieSearch');
+        const movieResultsDiv = document.getElementById('movieResults');
+
+        movieSearchInput.addEventListener('input', debounce(() => {
+            const searchTerm = movieSearchInput.value;
+            fetch(`http://www.omdbapi.com/?apikey=${omdbApiKey}&s=${searchTerm}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display movie results here
+                    // You can format and display the results as you like
+                    movieResultsDiv.innerHTML = JSON.stringify(data, null, 2);
+                });
+        }, 300));
+
+        // Recipe search function
+        const recipeSearchInput = document.getElementById('recipeSearch');
+        const recipeResultsDiv = document.getElementById('recipeResults');
+
+        recipeSearchInput.addEventListener('input', throttle(() => {
+            const searchTerm = recipeSearchInput.value;
+            fetch(`https://www.themealdb.com/api/json/v1/${mealDbApiKey}/search.php?s=${searchTerm}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display recipe results here
+                    // You can format and display the results as you like
+                    recipeResultsDiv.innerHTML = JSON.stringify(data, null, 2);
+                });
+        }, 300));
+    </script>
+</body>
+</html>
