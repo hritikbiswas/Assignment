@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS styles for user cards */
+        #root {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .user-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: calc(33.33% - 20px); /* Three cards per row */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            transition: transform 0.2s;
+        }
+
+        .user-card:hover {
+            transform: scale(1.05); /* Hover effect to enlarge the card slightly */
+        }
+
+        .user-card img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    let rootElement = document.getElementById("root");
+    fetch('https://reqres.in/api/users?page=2')
+        .then(function(res) {
+            res.json().then(function(res) {
+                printData(res.data);
+            });
+        })
+        .catch(function(err) {
+            console.log('err:', err);
+        });
+
+    function printData(data) {
+        data.forEach(function(item) {
+            let userCard = document.createElement("div");
+            userCard.classList.add("user-card"); // Add the "user-card" class
+
+            let userImage = document.createElement("img");
+            userImage.src = item.avatar;
+
+            let userName = document.createElement("p");
+            userName.innerText = item.first_name + " " + item.last_name;
+
+            let userEmail = document.createElement('p');
+            userEmail.innerText = item.email;
+
+            let userId = document.createElement("p");
+            userId.innerText = item.id;
+
+            userCard.append(userImage, userName, userEmail, userId);
+
+            rootElement.append(userCard);
+        });
+    }
+</script>
+</html>
