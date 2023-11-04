@@ -13,7 +13,7 @@ function App() {
   function Image() {
     return (
       <div>
-        <img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600" />
+        <img src="https://media.licdn.com/dms/image/C5603AQH6YLJNpKYptw/profile-displayphoto-shrink_800_800/0/1645321274249?e=2147483647&v=beta&t=U_poGN-aEKqAlOmeSyEXxy5VmTAWYOPXKC4Xvm6uB78" alt="pratik shukla" style={{border:"50%"}}/>
       </div>
     );
   }
